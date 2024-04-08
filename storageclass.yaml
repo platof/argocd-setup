@@ -1,0 +1,16 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  name: nfs-csi
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: fs-01f2951a52783e978.efs.us-east-1.amazonaws.com
+  share: /
+  subDir: ${pvc.metadata.namespace}/${pvc.metadata.name}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+mountOptions:
+  - nfsvers=4.1

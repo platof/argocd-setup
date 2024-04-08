@@ -1,0 +1,51 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: EksCluster
+  region: us-east-1
+  version: "1.23"
+  tags:
+    environment: development
+availabilityZones: ["us-east-1b", "us-east-1c"]
+
+nodeGroups:
+  - name: OnSpotDevelopment
+    privateNetworking: true
+    labels:
+      role: workers
+      environment: development
+    minSize: 2
+    desiredCapacity: 2
+    maxSize: 3
+    instanceType: "t3.medium"
+    maxPodsPerNode: 20
+    amiFamily: Bottlerocket
+    availabilityZones: ["us-east-1b", "us-east-1c"]
+    tags:
+      spot-enabled: "true"
+    volumeSize: 32
+    bottlerocket:
+      enableAdminContainer: true
+      settings:
+        kubernetes:
+          system-reserved:
+            cpu: "10m"
+            memory: "300Mi"
+            ephemeral-storage: "1Gi"
+          eviction-hard:
+            "memory.available": "10%"
+
+kubernetesNetworkConfig:
+  serviceIPv4CIDR: 172.31.0.0/16
+
+vpc:
+  autoAllocateIPv6: false
+  cidr: 172.32.0.0/16
+  clusterEndpoints:
+    privateAccess: true
+    publicAccess: true
+  publicAccessCIDRs:
+    - 0.0.0.0/0
+  nat:
+    gateway: Single

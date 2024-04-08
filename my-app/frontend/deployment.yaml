@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: simple-inventory-app
+  name: frontend-app
+  labels:
+    app: frontend-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+    spec:
+      containers:
+        - name: frontend-app
+          image: 253449359474.dkr.ecr.us-east-1.amazonaws.com/simple-inventory-app-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "50m"
+            limits:
+              memory: "768Mi"
+              cpu: "100m"

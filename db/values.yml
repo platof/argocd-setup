@@ -1,0 +1,10 @@
+auth:
+  username: postgres
+  database: postgres
+  existingSecret: postgres-credentials
+primary:
+  persistence:
+    storageClass: nfs-csi
+    accessModes:
+      - "ReadWriteOnce"
+    size: 1Gi
