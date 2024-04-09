@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/platof/argocd-setup.git
     targetRevision: HEAD
-    path: my-app/frontend
+    path: my-app
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
