@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          image: 253449359474.dkr.ecr.us-east-1.amazonaws.com/simple-inventory-app-backend:0.0.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
