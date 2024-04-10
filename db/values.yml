@@ -8,3 +8,10 @@ primary:
     accessModes:
       - "ReadWriteOnce"
     size: 1Gi
+resources:
+  requests:
+    memory: 768Mi
+    cpu: 250m
+  limits:
+    memory: 1Gi
+    cpu: 500m
