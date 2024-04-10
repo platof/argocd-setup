@@ -24,8 +24,7 @@ The microsoervice application was dockerized and built using a dockerfile which 
 
 
 ## Kubernetes Deployment
-Kubernetes manifest was created for each microservice which can be found inside the my-app folder in the root repository. The manifest consist of a Frontend and Backend. Altough we have a database created for the microservice application, this was deployed using helm chart which can be found in db folder.
-For each of the workload specification of desired replicas was defined in the manifest file. Resource requests and limits were appropriately defined by monitoring the metrics usage of the microservice based application in the manifest file. To expose the application to incoming traffic from outside the cluster ingress resource was configured.
+Kubernetes manifest was created for each microservice which can be found inside the my-app folder in the root repository. The manifest consist of a Frontend and Backend. Although we have a database created for the microservice application, this was deployed using helm chart which can be found in db folder. For each of the workload specification of desired replicas was defined in the manifest file. Resource requests and limits were appropriately defined by monitoring the metrics usage of the microservice based application in the manifest file. To expose the application to incoming traffic from outside the cluster ingress resource was configured.
 
 - `kubectl apply -f my-app/frontend/deployment.yaml`
 - `kubectl apply -f my-app/frontend/service.yaml`
@@ -55,7 +54,7 @@ microservice-based-app repo contains the code, dockerfile and workflow files.
 The workflow files are used to define automated workflows that triggers Github Actions in response to a push to the repository. It consists of a Job that builds the code using dockefile, tags the image and push the image to AWS ECR. So Once the image has been pushed to the AWS ECR, the workflow updates the manifest files in argocd-setup repository with the newest tagged image. 
 
 ### argocd-setup repository 
-This repository contains the manifests files needed for Continous deployment. The manifests files can be found in the my-app folder. ArgoCD was setup and configured in EKS cluster. The yaml file application.yaml which is located in the root directory of the repo is a definition for the argoCD application. In this yaml file we define our application, source code repository and desired state configurations. ArgoCD continuously monitors the git repository for changes to Kubernetes manifests and automically applies the changes to the EKS cluster.   
+This repository contains the manifests files needed for Continous deployment. The manifests files can be found in the my-app folder. ArgoCD was setup and configured in EKS cluster. The yaml file application.yaml which is located in the root directory of the repo is a definition for the argoCD application. In this yaml file we define our application, source code repository and desired state configurations. ArgoCD continuously monitors the git repository for changes to Kubernetes manifests and automically applies the changes to the EKS cluster. Rolling updates strategy is used in the deployment to roll out updates with zero downtime.   
 
 - `kubectl apply -f application.yaml`
 
