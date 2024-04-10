@@ -43,7 +43,7 @@ Horizontal Pod autoscaler was setup and configured for this project based on CPU
 ## CI/CD integration 
 For this Project, Automatic deployments has been setup using Github Actions and ArgoCD. Basically we have 2 repositories which are:
 
-- `microservice-based-app`
+- ([`microservice-based-app`](https://github.com/platof/microservice-based-app))
 - `argocd-setup`
 
 ### microservice-based-app repository
