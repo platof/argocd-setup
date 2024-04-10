@@ -9,7 +9,7 @@ This documentation provides a comprehensive guide for setting up and deploying a
 - AWS access credentials
 
 ## Kubernetes Setup
-Kubernetes Cluster was setup using AWS EKS. The configuration file (personal-eks.yaml) can be found in the root folder of the repository. EKS cluster nodes were placed in the private subnets for security purpose with NAT gateway configured and a Network LoadBalancer placed in public subnet. EFS volume was setup for persistent storage for the database that will be used by the microservice applications. Lastly nginx ingress controller was configured to manage external access to services within the cluster.
+Kubernetes Cluster was setup using AWS EKS. The configuration file (personal-eks.yaml) can be found in the root folder of the repository. EKS cluster nodes were placed in the private subnets for security purpose with NAT gateway configured and a Network LoadBalancer placed in public subnet. NFS CSI was setup for persistent volume storage for the database that will be used by the microservice applications. Lastly nginx ingress controller was configured to manage external access to services within the cluster.
 
 - `eksctl create cluster -f personal-eks.yaml`
 - `kubectl apply -f ingress-controller/deploy.yaml`
